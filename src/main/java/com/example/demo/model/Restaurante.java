@@ -26,7 +26,7 @@ public class Restaurante {
 	private BigDecimal taxaFrete;
 	
 	@ManyToOne
-	@JoinColumn(name = "cozinha_id", nullable = false )
+	@JoinColumn(name = "cozinha_id", nullable = true )
 	private Cozinha cozinha;
 	
 	@ManyToMany
@@ -42,6 +42,11 @@ public class Restaurante {
 	public void setNome(String nome) {	this.nome = nome;}
 	public BigDecimal getTaxaFrete() {	return taxaFrete;}
 	public void setTaxaFrete(BigDecimal taxaFrete) {	this.taxaFrete = taxaFrete;}
+	public Cozinha getCozinha() {	return cozinha;}
+	public void setCozinha(Cozinha cozinha) {	this.cozinha = cozinha;}
+	public List<FormaPagamento> getFormasPagamentos() {	return formasPagamentos;}
+	public void setFormasPagamentos(List<FormaPagamento> formasPagamentos) {	this.formasPagamentos = formasPagamentos;}
+	
 	
 	
 	@Override
