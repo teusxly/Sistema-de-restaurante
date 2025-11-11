@@ -1,9 +1,12 @@
 package com.example.demo.model;
 
-import java.math.BigDecimal;
+import java.math.BigDecimal; 
 import java.util.List;
 import java.util.Objects;
 
+
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,10 +15,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Restaurantes")
+@Table(name = "restaurantes")
 public class Restaurante {
 	
 	@Id
@@ -36,6 +40,10 @@ public class Restaurante {
 	private List<FormaPagamento> formasPagamentos;
 	
 	
+	@OneToOne(mappedBy = "restaurante", cascade = CascadeType.ALL)
+    private Endereco endereco;
+	
+	
 	public Long getId() {	return id;}
 	public void setId(Long id) {	this.id = id;}
 	public String getNome() {	return nome;}
@@ -44,6 +52,8 @@ public class Restaurante {
 	public void setTaxaFrete(BigDecimal taxaFrete) {	this.taxaFrete = taxaFrete;}
 	public Cozinha getCozinha() {	return cozinha;}
 	public void setCozinha(Cozinha cozinha) {	this.cozinha = cozinha;}
+	public Endereco getEndereco() {	return endereco;}
+	public void setEndereco(Endereco endereco) {	this.endereco = endereco;}
 	public List<FormaPagamento> getFormasPagamentos() {	return formasPagamentos;}
 	public void setFormasPagamentos(List<FormaPagamento> formasPagamentos) {	this.formasPagamentos = formasPagamentos;}
 	

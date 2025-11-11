@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.demo.Exception.EntidadeNaoEncontradaException;
 import com.example.demo.model.Cozinha;
 import com.example.demo.model.Restaurante;
 import com.example.demo.repository.CozinhaRepository;
@@ -34,7 +35,7 @@ public class RestauranteService {
 	    if (restaurante.getCozinha() != null && restaurante.getCozinha().getId() != null) {
 	        Long cozinhaId = restaurante.getCozinha().getId();
 	        Cozinha cozinha = cozinhaRepository.findById(cozinhaId)
-	            .orElseThrow(() -> new RuntimeException("Cozinha não encontrada com ID: " + cozinhaId));
+	            .orElseThrow(() -> new EntidadeNaoEncontradaException("Cozinha não encontrada com ID: " + cozinhaId));
 	        restaurante.setCozinha(cozinha);
 	    }
 	    return restauranteRepository.save(restaurante);
@@ -43,7 +44,7 @@ public class RestauranteService {
 	
 	public Restaurante buscarRestaurante(@PathVariable Long id) {
 		return restauranteRepository.findById(id).
-				orElseThrow(()-> new RuntimeException("Restaurante não encontrado!"));
+				orElseThrow(()-> new EntidadeNaoEncontradaException("Restaurante não encontrado!"));
 	}
 	
 	public ResponseEntity<?> removerRestaurante(@PathVariable Long id) {
